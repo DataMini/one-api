@@ -104,7 +104,10 @@ func main() {
 
 	router.SetRouter(server, buildFS)
 	var port = os.Getenv("PORT")
-	var host = os.Getenv("HOST", "localhost")
+	var host = os.Getenv("HOST")
+	if host == "" {
+		host = "localhost"
+	}
 	if port == "" {
 		port = strconv.Itoa(*common.Port)
 	}
