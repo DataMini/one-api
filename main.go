@@ -104,11 +104,12 @@ func main() {
 
 	router.SetRouter(server, buildFS)
 	var port = os.Getenv("PORT")
+	var host = os.Getenv("HOST", "localhost")
 	if port == "" {
 		port = strconv.Itoa(*common.Port)
 	}
-	logger.SysLogf("server started on http://localhost:%s", port)
-	err = server.Run(":" + port)
+	logger.SysLogf("server started on http://%s:%s", host, port)
+	err = server.Run(fmt.Sprintf("%s:%s", host, port))
 	if err != nil {
 		logger.FatalLog("failed to start HTTP server: " + err.Error())
 	}
